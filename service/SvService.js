@@ -20,12 +20,6 @@ export const SvService = {
             method: "DELETE",
         })
     },
-    edit(id) {
-        return axios({
-            url: `${BASE_URL}/${id}`,
-            method: "PUT",
-        })
-    },
     addDeltailSv(id) {
         return axios({
             url: `${BASE_URL}/${id}`,
