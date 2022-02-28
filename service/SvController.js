@@ -16,7 +16,25 @@ let svController = {
     },
     getInfo(tenSv, maSv, mailSv, math, phys, chem) {
         
-        if(tenSv != '' &&
+        if(maSv == '' &&
+        tenSv != '' &&
+        mailSv != '' &&
+        math != '' &&
+        phys != '' &&
+        chem != ''
+        ){
+            return {
+                name: tenSv,
+                email: mailSv,
+                toan: math,
+                ly: phys,
+                hoa: chem,
+            }
+        }
+    },
+    getIdInfo(tenSv, maSv, mailSv, math, phys, chem){
+        if(maSv != '' &&
+        tenSv != '' &&
         mailSv != '' &&
         math != '' &&
         phys != '' &&
@@ -29,6 +47,13 @@ let svController = {
                 toan: math,
                 ly: phys,
                 hoa: chem,
+            }
+        }
+    },
+    findIndex(id, arrays){
+        for(let array in arrays){
+            if(arrays[array].id == id){
+                return array;
             }
         }
     }
