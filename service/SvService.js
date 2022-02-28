@@ -1,5 +1,6 @@
 const BASE_URL = "https://620e4fdc585fbc3359ddbfcf.mockapi.io/sinhvien";
 
+// method to comunicate with mockapi server using axios 
 export const SvService = {
     getSv() {
         return axios({

@@ -1,6 +1,8 @@
+//import module
 import {SvService} from './service/SvService.js'
 import svController from './service/SvController.js'
 
+//get Element using id
 var dssv = [];
 let tenSv = document.getElementById('txtTenSV');
 let maSv = document.getElementById('txtMaSV');
@@ -8,16 +10,22 @@ let mailSv = document.getElementById('txtEmail');
 let math = document.getElementById('txtDiemToan');
 let phys = document.getElementById('txtDiemLy');
 let chem = document.getElementById('txtDiemHoa');
+let search = document.getElementById('txtSearch');
 
+//create loading element
 let animate = document.querySelector('.loading-animate');
 
+//loading start animation 
 function load() {
     animate.classList.add("active");
 }
+
+// remove loading animation when event already loaded
 function unLoad() {
     animate.classList.remove("active");
 }
 
+//reset the input when it done
 function resetWhenDone(){
     tenSv.value = null;
     maSv.value = null;
@@ -27,6 +35,7 @@ function resetWhenDone(){
     chem.value = null;
 }
 
+//get student data 
 SvService.getSv()
     .then((res) => {
         dssv = [...res.data];
@@ -35,10 +44,12 @@ SvService.getSv()
         console.log(err);
     })
 
+// render in the first loading
 setTimeout(() => {
     svController.renderTable(dssv);
 }, 2000);
 
+// render table in tbodySinhVien field
 document.getElementById('tbodySinhVien').addEventListener('click', function(e){
     var index = e.target.dataset.index;
     if(e.target.closest('.btn-edit')){
@@ -57,15 +68,14 @@ document.getElementById('tbodySinhVien').addEventListener('click', function(e){
             unLoad()
             dssv.splice(index, 1);
             svController.renderTable(dssv);
-            console.warn(res);
         })
         .catch((err) => {
-            console.log(err);
+            console.warn(err);
         })
     }
 })
 
-
+//add more student events
 document.getElementById('themSv').addEventListener('click', () => {
 
     var info = svController.getInfo(tenSv.value, maSv.value, mailSv.value, Number(math.value), Number(phys.value), Number(chem.value));
@@ -85,8 +95,10 @@ document.getElementById('themSv').addEventListener('click', () => {
     }
 })
 
+// reset event in all input
 document.getElementById('resetSv').addEventListener('click', resetWhenDone);
 
+//onclick to enforcement the update event
 document.getElementById('update').onclick = () => {
     var info = svController.getIdInfo(tenSv.value, maSv.value, mailSv.value, Number(math.value), Number(phys.value), Number(chem.value));
     if(info){
@@ -102,5 +114,23 @@ document.getElementById('update').onclick = () => {
         .catch(err => {
             console.warn(err);
         })
+    }
+}
+
+// handling searching by name event
+document.getElementById('btnSearch').onclick = () => {
+    var searchValue = search.value;
+    var listSv = Array.from(document.getElementsByClassName('inList'));
+    // console.log(listSv);
+    if(searchValue){
+        // console.log(searchValue);
+        var dssvByName = svController.searchName(searchValue, dssv);
+        if(dssvByName.length){
+            listSv.forEach((sv, index) => {
+                if(index != dssvByName)
+                    sv.style.display = 'none';
+            })
+        }
+        
     }
 }
