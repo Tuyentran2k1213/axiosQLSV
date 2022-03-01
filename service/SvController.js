@@ -8,7 +8,7 @@ let svController = {
         <td>${item.id}</td>
         <td>${item.name}</td>
         <td>${item.email}</td>
-        <td>${(item.toan + item.ly + item.hoa) / 3}</td>
+        <td>${((item.toan + item.ly + item.hoa) / 3).toFixed(2)}</td>
         <td><button data-index = ${index} class = "btn btn-success btn-edit">sửa</button>
         <button data-index = ${index} class = "btn btn-danger btn-dele">Xóa</button></td>
         </tr>`).join('');
