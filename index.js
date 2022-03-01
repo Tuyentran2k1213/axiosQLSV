@@ -11,6 +11,7 @@
     let phys = document.getElementById('txtDiemLy');
     let chem = document.getElementById('txtDiemHoa');
     let search = document.getElementById('txtSearch');
+    let warnSearch = document.getElementById('noSearch');
     
     //create loading element
     let animate = document.querySelector('.loading-animate');
@@ -129,16 +130,23 @@ document.getElementById('btnSearch').onclick = () => {
         // console.log(searchValue);
         var dssvByName = svController.searchName(searchValue, dssv);
         var dssvNameLength = dssvByName.length;
-        console.log(dssvByName);
+        // console.log(dssvByName);
         if(dssvNameLength){
             listSv.forEach((sv, index) => {              
                 if(!dssvByName.includes(`${index}`))
                     sv.style.display = 'none';
             })
+        } else{
+            warnSearch.innerHTML = `không tìm thấy sinh viên có tên <b>${searchValue}</b> trong danh sách`;
         }
         
     }
 }
+
+// reset search 
+search.onfocus = () => {
+    warnSearch.innerHTML = null;
+}
+
 }
 running();
-export default running;

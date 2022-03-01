@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-6 form-group">
                   <label for="">Tên Sinh Viên : </label>
-                  <input type="text" class="form-control" rules="required|name|min:6" name="fullname" id="txtTenSV" />
+                  <input type="text" class="form-control" rules="required|name|min:4" name="fullname" id="txtTenSV" />
                   <span id="spanTenSV" class="text-danger form-message"></span>
                 </div>
               </div>
@@ -107,6 +107,9 @@
               </div>
               <div class="col-3 form-group">
                 <button id="btnSearch" class="btn btn-primary">Search</button>
+              </div>
+              <div class="col-12">
+                <span id="noSearch" class="text-danger"></span>
               </div>
             </div>
           </div>
