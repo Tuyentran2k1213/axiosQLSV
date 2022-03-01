@@ -1,19 +1,21 @@
-//import module
-import {SvService} from './service/SvService.js'
-import svController from './service/SvController.js'
+    //import module
+    import {SvService} from './service/SvService.js'
+    import svController from './service/SvController.js'
+    
+    //get Element using id
+    var dssv = [];
+    let tenSv = document.getElementById('txtTenSV');
+    let maSv = document.getElementById('txtMaSV');
+    let mailSv = document.getElementById('txtEmail');
+    let math = document.getElementById('txtDiemToan');
+    let phys = document.getElementById('txtDiemLy');
+    let chem = document.getElementById('txtDiemHoa');
+    let search = document.getElementById('txtSearch');
+    
+    //create loading element
+    let animate = document.querySelector('.loading-animate');
+function running(){
 
-//get Element using id
-var dssv = [];
-let tenSv = document.getElementById('txtTenSV');
-let maSv = document.getElementById('txtMaSV');
-let mailSv = document.getElementById('txtEmail');
-let math = document.getElementById('txtDiemToan');
-let phys = document.getElementById('txtDiemLy');
-let chem = document.getElementById('txtDiemHoa');
-let search = document.getElementById('txtSearch');
-
-//create loading element
-let animate = document.querySelector('.loading-animate');
 
 //loading start animation 
 function load() {
@@ -33,6 +35,7 @@ function resetWhenDone(){
     math.value = null;
     phys.value = null;
     chem.value = null;
+    search.value = null;
 }
 
 //get student data 
@@ -119,18 +122,23 @@ document.getElementById('update').onclick = () => {
 
 // handling searching by name event
 document.getElementById('btnSearch').onclick = () => {
-    var searchValue = search.value;
+    var searchValue = search.value.trim();
     var listSv = Array.from(document.getElementsByClassName('inList'));
     // console.log(listSv);
     if(searchValue){
         // console.log(searchValue);
         var dssvByName = svController.searchName(searchValue, dssv);
-        if(dssvByName.length){
-            listSv.forEach((sv, index) => {
-                if(index != dssvByName)
+        var dssvNameLength = dssvByName.length;
+        console.log(dssvByName);
+        if(dssvNameLength){
+            listSv.forEach((sv, index) => {              
+                if(!dssvByName.includes(`${index}`))
                     sv.style.display = 'none';
             })
         }
         
     }
 }
+}
+running();
+export default running;

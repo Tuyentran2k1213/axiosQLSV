@@ -24,6 +24,9 @@
       .active{
         display: block;
       }
+      .invalid input{
+        border: solid 1px red;
+      }
     </style>
   
     <body>
@@ -46,37 +49,37 @@
                 <div class="col-6 form-group">
                   <label for="">Mã Sinh Viên : </label>
                   <input type="text" disabled class="form-control" id="txtMaSV" />
-                  <span id="spanMaSV" class="text-danger"></span>
+                  <span id="spanMaSV" class="text-danger form-message"></span>
                 </div>
                 <div class="col-6 form-group">
                   <label for="">Tên Sinh Viên : </label>
-                  <input type="text" class="form-control" id="txtTenSV" />
-                  <span id="spanTenSV" class="text-danger"></span>
+                  <input type="text" class="form-control" rules="required|name|min:6" name="fullname" id="txtTenSV" />
+                  <span id="spanTenSV" class="text-danger form-message"></span>
                 </div>
               </div>
               <div class="row">
                 <div class="col-6 form-group">
                   <label for="">Email : </label>
-                  <input type="text" class="form-control" id="txtEmail" />
-                  <span id="spanEmailSV" class="text-danger"></span>
+                  <input type="text" name="email" rules = 'required|email' class="form-control" id="txtEmail" />
+                  <span id="spanEmailSV" class="text-danger form-message"></span>
                 </div>
               </div>
   
               <div class="row">
                 <div class="col-4 form-group">
                   <label for="">Điểm toán : </label>
-                  <input type="text" class="form-control" id="txtDiemToan" />
-                  <span id="spanToan" class="text-danger"></span>
+                  <input type='number' name="toan" rules="required" class="form-control" id="txtDiemToan" />
+                  <span id="spanToan" class="text-danger form-message"></span>
                 </div>
                 <div class="col-4 form-group">
                   <label for="">Điểm lý : </label>
-                  <input type="text" class="form-control" id="txtDiemLy" />
-                  <span id="spanLy" class="text-danger"></span>
+                  <input type='number' name="ly" rules="required" class="form-control" id="txtDiemLy" />
+                  <span id="spanLy" class="text-danger form-message"></span>
                 </div>
                 <div class="col-4 form-group">
                   <label for="">Điểm hóa : </label>
-                  <input type="text" class="form-control" id="txtDiemHoa" />
-                  <span id="spanHoa" class="text-danger"></span>
+                  <input type='number' name="hoa" rules="required" class="form-control" id="txtDiemHoa" />
+                  <span id="spanHoa" class="text-danger form-message"></span>
                 </div>
               </div>
   
@@ -158,6 +161,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script type="module" src="./index.js"></script>
+        <script type="text/javascript" src="./service/validator.js"></script>
+        <script>
+          validator('#formQLSV');
+        </script>
       </div>
     </body>
   </html>

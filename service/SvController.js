@@ -64,7 +64,7 @@ let svController = {
     searchName(name, datas){
         var listIndex = [];
         for(let data in datas){
-            if(datas[data].name == name){
+            if(datas[data].name.includes(name)){
                 listIndex.push(data);
             }
         }
